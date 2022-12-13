@@ -42,9 +42,9 @@ void EQ3Climate::update() {
   if (!last_id.has_value()) {
     update_id();
   }
-  if (!last_schedule[0].has_value()) {
-    update_schedule();
-  }
+  // if (!last_schedule[0].has_value()) {
+  //   update_schedule();
+  // }
   update_retry(3);
 }
 
