@@ -71,6 +71,8 @@ void EQ3Climate::update_retry(int tries) {
 void EQ3Climate::update_id() {
   ESP_LOGI(TAG, "Requesting ID of %10llx...", address);
 
+  esp_task_wdt_reset();
+
   bool success = with_connection([this]() {
     return query_id();
   });
@@ -85,9 +87,12 @@ void EQ3Climate::update_id() {
 void EQ3Climate::update_schedule() {
   ESP_LOGI(TAG, "Requesting Schedule of %10llx...", address);
 
+  esp_task_wdt_reset();
+
   bool success = with_connection([this]() {
     bool success = false;
     for (int day = EQ3_FirstDay; day < EQ3_LastDay; ++day) {
+      esp_task_wdt_reset();
       if (!last_schedule[day].has_value()) {
         success = query_schedule((EQ3Day)day) || success;
       }

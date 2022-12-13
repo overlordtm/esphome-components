@@ -7,6 +7,7 @@
 
 #ifdef ARDUINO_ARCH_ESP32
 #include <memory>
+#include "esp_task_wdt.h"
 
 class ESP32BLEClient;
 
