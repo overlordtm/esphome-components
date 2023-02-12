@@ -304,7 +304,8 @@ ClimateTraits EQ3Climate::traits() {
   }
   traits.set_supported_modes({
     CLIMATE_MODE_AUTO,
-    CLIMATE_MODE_HEAT
+    CLIMATE_MODE_HEAT,
+    CLIMATE_MODE_OFF
   });
   traits.set_supported_presets({
     CLIMATE_PRESET_HOME,

@@ -5,6 +5,9 @@
 #include "../esp32_ble_clients/esp32_ble.h"
 #include "../esp32_ble_clients/esp32_ble_client.h"
 
+#include <esp_task_wdt.h>
+
+
 using namespace esphome;
 
 static const char *TAG = "eq3_cmd";
@@ -90,10 +93,13 @@ bool EQ3Climate::send_command(void *command, uint16_t length) {
     return false;
   }
 
+  esp_task_wdt_init(20, false);
+
   uint16_t command_handle = ble_client->get_characteristic(
     PROP_SERVICE_UUID, PROP_COMMAND_CHARACTERISTIC_UUID);
   if (!command_handle) {
     ESP_LOGE(TAG, "Cannot find command handle for %10llx.", address);
+    // esp_task_wdt_init(5, true);
     return false;
   }
 
@@ -110,6 +116,8 @@ bool EQ3Climate::send_command(void *command, uint16_t length) {
     ESP_LOGV(TAG, "Send of `%s` to %10llx to handle %04x: %d",
       format_hex_pretty((const uint8_t*)command, length).c_str(), address, command_handle, result);
   }
+
+//   esp_task_wdt_init(5, true);
 
   return result;
 }
