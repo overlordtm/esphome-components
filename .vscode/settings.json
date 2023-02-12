@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "semaphore": "cpp",
+        "stop_token": "cpp",
+        "bitset": "cpp",
+        "memory": "cpp",
+        "random": "cpp",
+        "optional": "cpp",
+        "functional": "cpp"
+    }
+}
